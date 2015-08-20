@@ -11,9 +11,9 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
     private static final int DB_VERSION = 1;
     private static final String DB_NAME ="wildfire.db";
-    private static final String TABLE_COUNTRY = "COUNTRY";
-    private static final String COUNTRY_COLUMN_CODE = "CODE";
-    private static final String COUNTRY_COLUMN_NAME = "NAME";
+    private static final String TABLE_COUNTRY = "country";
+    private static final String COUNTRY_COLUMN_CODE = "code";
+    private static final String COUNTRY_COLUMN_NAME = "name";
 
     public MyDBHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DB_NAME, factory, DB_VERSION);
