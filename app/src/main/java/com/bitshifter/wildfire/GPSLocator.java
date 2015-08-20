@@ -14,7 +14,7 @@ import android.util.Log;
 /**
  * Created by rohit on 20/8/15.
  */
-public class GPSLocation implements LocationListener {
+public class GPSLocator implements LocationListener {
 
     private final Context mContext;
     // flag for GPS status
@@ -32,7 +32,7 @@ public class GPSLocation implements LocationListener {
     // The minimum time between updates in milliseconds
     private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
 
-    public GPSLocation(Context mContext) {
+    public GPSLocator(Context mContext) {
         this.mContext = mContext;
         getLocation();
     }
@@ -66,8 +66,7 @@ public class GPSLocation implements LocationListener {
                         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
                         Log.d("GPS Enabled", "GPS Enabled");
                         if (locationManager != null) {
-                            location = locationManager
-                                    .getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                            location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                             if (location != null) {
                                 latitude = location.getLatitude();
                                 longitude = location.getLongitude();
