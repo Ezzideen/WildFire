@@ -34,10 +34,14 @@ public class GPSLocator implements LocationListener {
 
     public GPSLocator(Context mContext) {
         this.mContext = mContext;
-        getLocation();
+        findLocation();
     }
 
-    public Location getLocation(){
+    public Location getLocation() {
+        return location;
+    }
+
+    public Location findLocation(){
         try {
             locationManager = (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);
             // getting GPS status
