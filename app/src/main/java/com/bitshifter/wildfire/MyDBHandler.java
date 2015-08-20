@@ -3,6 +3,7 @@ package com.bitshifter.wildfire;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 /**
  * Created by rohit on 20/8/15.
@@ -17,6 +18,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
     public MyDBHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DB_NAME, factory, DB_VERSION);
+        Log.i("OnCreate", "COnstructor DB");
     }
 
     @Override
@@ -28,6 +30,8 @@ public class MyDBHandler extends SQLiteOpenHelper {
                 ");";
         db.execSQL(queryCountryTable);
 
+        FetchCountryData.insertCountriesIntoDatabase(db);
+        Log.i("OnCreate", "CREATING DB");
     }
 
     @Override

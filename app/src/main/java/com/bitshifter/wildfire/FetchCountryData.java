@@ -6,8 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
 import android.util.Log;
+import android.widget.Toast;
 
-import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -53,7 +53,7 @@ public class FetchCountryData {
                 String name = jsonArray.getJSONObject(i).getJSONObject("fields").getString("name");
                 Country country = new Country(id,name);
                 countryList.add(country);
-//                Log.v("COUNTRY",name);
+                Log.v("COUNTRY",name);
             }
         }catch (JSONException e){
             Log.e("ERROR",e.toString());
@@ -71,38 +71,33 @@ public class FetchCountryData {
         }
     }
 
-    //turns on gps and finds country and then searches for country code in database
-    public static int getCountryCode(Context context, SQLiteDatabase db){
-        String countryName = getCountryName(context);
-        String query = "SELECT "+ MyDBHandler.COUNTRY_COLUMN_CODE +
-                        " FROM "+ MyDBHandler.TABLE_COUNTRY +
-                        " WHERE " + MyDBHandler.COUNTRY_COLUMN_NAME +" = "+ countryName +" ;";
-        Cursor cursor = db.rawQuery(query,null);
-        cursor.moveToFirst();
-        int countryCode = cursor.getInt(cursor.getColumnIndex(MyDBHandler.COUNTRY_COLUMN_CODE));
-        return countryCode;
-    }
-
     //finding Country Name from Coordinates Using geonames api
-    private static String getCountryName(Context context) {
+    public static void getCountryCode(final Context context, final SQLiteDatabase db) {
         Location location = getLocation(context);
-        String BASE_URL = "http://api.geonames.org/findNearbyPlaceNameJSON";
-        AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         params.put("lat", location.getLatitude());
         params.put("lng",location.getLongitude());
         params.put("username", "wildfire");
-        client.get(BASE_URL, params, new JsonHttpResponseHandler() {
+        GeoNameRESTClient.get("",params,new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
                     country = response.getJSONArray("geonames").getJSONObject(0).getString("countryName");
+                    String query = "SELECT "+ MyDBHandler.COUNTRY_COLUMN_CODE +
+                            " FROM "+ MyDBHandler.TABLE_COUNTRY +
+                            " WHERE " + MyDBHandler.COUNTRY_COLUMN_NAME +" = '"+ country +"' ;";
+                    Cursor cursor = db.rawQuery(query,null);
+                    cursor.moveToFirst();
+                    int countryCode = 0;
+                    if(!cursor.isAfterLast())
+                        countryCode = cursor.getInt(0);//cursor.getColumnIndex(MyDBHandler.COUNTRY_COLUMN_CODE)
+                    Toast.makeText(context,country+" : "+countryCode,Toast.LENGTH_LONG).show();
+
                 } catch (JSONException e) {
                     Log.e("JSON Exception", e.toString());
                 }
             }
         });
-        return country;
     }
 
     private static Location getLocation(Context context) {
