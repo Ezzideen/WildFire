@@ -60,7 +60,7 @@
         android:id="@+id/bWebView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="View Link"
+        android:text="@string/button_view_related_articles"
         android:background="@color/primary"
         android:textColor="@color/icons"
         android:layout_marginBottom="10dp"

@@ -15,6 +15,18 @@
         />
 
     <Button
+        android:id="@+id/bWebView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_view_related_articles"
+        android:background="@color/primary"
+        android:textColor="@color/icons"
+        android:visibility="invisible"
+        android:layout_above="@+id/fab_button"
+        android:layout_marginBottom="20dp"
+        android:layout_centerHorizontal="true" />
+
+    <Button
         android:id="@+id/fab_button"
         android:transitionName="fab"
         android:layout_width="@dimen/float_button_size"

@@ -3,6 +3,7 @@ package com.bitshifter.wildfire;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.os.Bundle;
 import android.transition.Slide;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 
 public class VictimActivity extends Activity {
 
+    private static final String PREFERENCE = "preference";
     static TextView tvCountry, tvLocation;
     static TextView tvAmbulance, tvFire, tvPolice;
     static String ambulance, fire, police;
@@ -25,7 +27,6 @@ public class VictimActivity extends Activity {
     static Context context;
     private PopupWindow popupWindow;
     static private Button webViewButton;
-    public static final String EXTRA_HTML = "com.bitshifter.wildfire.victimActivity.EXTRA_HTML";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +58,7 @@ public class VictimActivity extends Activity {
         tvLocation.setText("Found You!!");
         tvCountry.setText(s);
         RetrievePresentDistressState distressState = new RetrievePresentDistressState();
-        distressState.currentScenario(country.getId());
+        distressState.currentScenario(country.getId(), 0);
         ambulance = country.getAmbulanceNumber();
         fire = country.getFireNumber();
         police = country.getPoliceNumber();
@@ -104,11 +105,15 @@ public class VictimActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, WebViewActivity.class);
-                intent.putExtra(EXTRA_HTML, passHtml);
+
+                SharedPreferences.Editor editor = context.getSharedPreferences(PREFERENCE, MODE_PRIVATE).edit();
+                editor.putString("html",passHtml);
+                editor.commit();
+
                 context.startActivity(intent);
             }
         });
-
     }
+
 
 }

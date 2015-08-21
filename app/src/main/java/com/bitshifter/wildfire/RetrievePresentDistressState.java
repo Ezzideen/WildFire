@@ -37,14 +37,24 @@ public class RetrievePresentDistressState {
         this.articles = articles;
     }
 
-    public void currentScenario(int countryCode) {
+    public void currentScenario(int countryCode, final int selector) {
         Log.v(TAG,"RetrieveDistressState currentScenario");
         AsyncHttpClient client = new AsyncHttpClient();
         client.get("http://api.rwlabs.org/v1/countries/" + Integer.toString(countryCode), new AsyncHttpResponseHandler() {
                     @Override
                     public void onStart() {
                         super.onStart();
-                        progressDialog = ProgressDialog.show(VictimActivity.context,"Something ..","Something .....");
+                        switch (selector) {
+                            case 0:
+                                progressDialog = ProgressDialog.show(VictimActivity.context,"Processing...",
+                                        "Finding relevant information. Please wait.");
+                                break;
+                            case 1:
+                                progressDialog = ProgressDialog.show(FamilyActivity.context,"Processing...",
+                                        "Finding relevant information. Please wait.");
+                                break;
+
+                        }
                     }
 
                     @Override
@@ -81,7 +91,16 @@ public class RetrievePresentDistressState {
                                 Log.v(TAG, html);
                                 if (html != null) {
                                     setArticles(html);
-                                    VictimActivity.callWebView(html);
+
+                                    switch (selector) {
+                                        case 0:
+                                            VictimActivity.callWebView(html);
+                                            break;
+                                        case 1:
+                                            FamilyActivity.callWebView(html);
+                                            break;
+                                    }
+
                                 }
 
 

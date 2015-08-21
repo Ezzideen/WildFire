@@ -130,12 +130,11 @@ public class FetchCountryData {
         GeoNameRESTClient.get("", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                JSONObject response=new JSONObject();
+                JSONObject response = new JSONObject();
                 try {
                     response = new JSONObject(new String(responseBody));
                     country = response.getJSONArray("geonames").getJSONObject(0).getString("countryName");
-                }
-                catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -149,30 +148,40 @@ public class FetchCountryData {
             public void onFinish() {
                 super.onFinish();
 
-                Log.i(TAG,"JSON :"+country);
+                Log.i(TAG, "JSON :" + country);
                 Log.i(TAG, "COUNTRY NAME : " + country);
-                Cursor cursor = db.query(MyDBHandler.TABLE_COUNTRY, new String[]{MyDBHandler.COUNTRY_COLUMN_CODE},
-                        MyDBHandler.COUNTRY_COLUMN_NAME + " = ? ", new String[]{country}, null, null, null);
-                cursor.moveToFirst();
-                Log.i(TAG, "Cursor :" + cursor);
-                int countryCode = 0;
-                if (!cursor.isAfterLast())
-                    countryCode = cursor.getInt(0);//cursor.getColumnIndex(MyDBHandler.COUNTRY_COLUMN_CODE)
+//                Cursor cursor = db.query(MyDBHandler.TABLE_COUNTRY, new String[]{MyDBHandler.COUNTRY_COLUMN_CODE},
+//                        MyDBHandler.COUNTRY_COLUMN_NAME + " = ? ", new String[]{country}, null, null, null);
+//                cursor.moveToFirst();
+//                Log.i(TAG, "Cursor :" + cursor);
+//                int countryCode = 0;
+//                if (!cursor.isAfterLast())
+//                    countryCode = cursor.getInt(0);//cursor.getColumnIndex(MyDBHandler.COUNTRY_COLUMN_CODE)
 
+                int countryCode = getCountryCodeFromCountryName(db,country);
                 countryCode = 168;
 
                 Log.i(TAG, "COUNTRY CODE :" + countryCode);
                 // Toast.makeText(context, country + " : " + countryCode, Toast.LENGTH_LONG).show();
 
-                Country c = getCountryByCountryCode(db,Integer.toString(countryCode));
-                Log.i(TAG,"Country code :"+c.getId());
+                Country c = getCountryByCountryCode(db, Integer.toString(countryCode));
+                Log.i(TAG, "Country code :" + c.getId());
 //                Log.i(TAG,"Distress State :"+distressState.isInDistressState());
-                VictimActivity.setLocationText(c,location);
+                VictimActivity.setLocationText(c, location);
             }
         });
     }
 
-
+    public static int getCountryCodeFromCountryName(SQLiteDatabase db, String countryName){
+        Cursor cursor = db.query(MyDBHandler.TABLE_COUNTRY, new String[]{MyDBHandler.COUNTRY_COLUMN_CODE},
+                MyDBHandler.COUNTRY_COLUMN_NAME + " = ? ", new String[]{countryName}, null, null, null);
+        cursor.moveToFirst();
+        Log.i(TAG, "Cursor :" + cursor);
+        int countryCode = 0;
+        if (!cursor.isAfterLast())
+            countryCode = cursor.getInt(0);//cursor.getColumnIndex(MyDBHandler.COUNTRY_COLUMN_CODE)
+        return countryCode;
+    }
 
     public static Country getCountryByCountryCode(SQLiteDatabase db,String code){
         Cursor cursor = db.query(MyDBHandler.TABLE_COUNTRY,
