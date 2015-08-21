@@ -19,7 +19,7 @@ public class ProvideAssistanceActivity extends Activity {
 
     private static final String PREFERENCE = "preference";
     static TextView tvCountry, tvLocation;
-    static TextView tvAmbulance, tvFire, tvPolice;
+    static TextView tvAmbulance, tvFire, tvPolice, tvCordinates;
     static String ambulance, fire, police;
     static RetrievePresentDistressState distressState;
     private PopupWindow popupWindow;
@@ -34,6 +34,7 @@ public class ProvideAssistanceActivity extends Activity {
 
         tvCountry = (TextView) findViewById(R.id.tvCountry1);
         tvLocation = (TextView) findViewById(R.id.tvLocation1);
+        tvCordinates = (TextView) findViewById(R.id.tvCordinates1);
 
         webViewButton = (Button) findViewById(R.id.bWebView1);
 
@@ -49,10 +50,9 @@ public class ProvideAssistanceActivity extends Activity {
     }
 
     public static void setLocationText(Country country, Location location) {
-
-        String s = country.getName() + "\n" + location.getLatitude() + " , "+  location.getLongitude();
         tvLocation.setText("Found You!!");
-        tvCountry.setText(s);
+        tvCountry.setText(country.getName());
+        tvCordinates.setText("( " + location.getLatitude() + ", " + location.getLongitude() + " )");
         RetrievePresentDistressState distressState = new RetrievePresentDistressState();
         distressState.currentScenario(country.getId(), 2);
         ambulance = country.getAmbulanceNumber();

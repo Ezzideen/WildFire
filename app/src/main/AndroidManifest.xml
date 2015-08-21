@@ -74,6 +74,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.bitshifter.wildfire.VolunteerActivity" />
         </activity>
+        <activity
+            android:name=".JobActivity"
+            android:label="@string/title_activity_job"
+            android:parentActivityName=".VolunteerActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.bitshifter.wildfire.VolunteerActivity" />
+        </activity>
     </application>
 
 </manifest>

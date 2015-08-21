@@ -16,17 +16,16 @@
     <Button
         android:id="@+id/fab_button"
         android:transitionName="fab"
-        android:layout_width="@dimen/float_button_size"
-        android:layout_height="@dimen/float_button_size"
+        android:layout_width="58dp"
+        android:layout_height="58dp"
         android:background="@drawable/ripple_round"
         android:stateListAnimator="@anim/fab_anim"
         android:elevation="@dimen/button_elevation"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="30dp"
         android:drawableEnd="@drawable/phone"
         android:onClick="onFabClick"
-        />
+        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@+id/textView2" />
 
     <ImageView
         android:id="@+id/imageView1"
@@ -53,7 +52,9 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_below="@+id/tvLocation1"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:typeface="sans" />
 
     <Button
         android:id="@+id/bWebView1"
@@ -62,10 +63,44 @@
         android:text="@string/button_view_related_articles"
         android:background="@color/primary"
         android:textColor="@color/icons"
-        android:layout_marginBottom="10dp"
         android:layout_above="@+id/fab_button"
         android:layout_centerHorizontal="true"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:layout_marginBottom="20dp"
         android:visibility="invisible"
         />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/text_view_provide_assistance_title"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:id="@+id/tvAssistanceTitle"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:textColor="@color/icons"
+        android:textSize="28sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/text_view_helpline"
+        android:id="@+id/textView2"
+        android:textColor="@color/primary_text"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/tvCordinates1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_below="@+id/tvCountry1"
+        android:layout_centerHorizontal="true" />
+
 
 </RelativeLayout>

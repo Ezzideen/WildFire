@@ -13,6 +13,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 
 public class FamilyActivity extends Activity {
@@ -20,7 +23,7 @@ public class FamilyActivity extends Activity {
     private static final String PREFERENCE = "preference";
     private LinearLayout rowContainer;
     private static final int SCALE_DELAY = 120;
-    private static EditText etName, etLocation;
+    private static EditText etName, etLocation, etPhone;
     static private Button webViewButton;
     static Context context;
     public static final String EXTRA_HTML = "com.bitshifter.wildfire.familyActivity.EXTRA_HTML";
@@ -32,10 +35,12 @@ public class FamilyActivity extends Activity {
         //
         etLocation = (EditText) findViewById(R.id.etLocation);
         etName = (EditText) findViewById(R.id.etName);
+        etPhone = (EditText) findViewById(R.id.etPhone);
         context = this;
         webViewButton =(Button) findViewById(R.id.bWebView);
         manageTransition();
     }
+
 
     private void manageTransition() {
 
@@ -99,17 +104,34 @@ public class FamilyActivity extends Activity {
     }
 
     public void onFabClick(View v){
-        String countryName = etLocation.getText().toString();
-        String name = etName.getText().toString();
+        String countryName = etLocation.getText().toString().trim();
+        String name = etName.getText().toString().trim();
         MyDBHandler db = new MyDBHandler(this,null,null,1);
         int countryCode = FetchCountryData.getCountryCodeFromCountryName(db.getWritableDatabase(),countryName);
         Country country = FetchCountryData.getCountryByCountryCode(db.getWritableDatabase(),Integer.toString(countryCode));
-        //TODO message victim
-        //TODO message own contact
         RetrievePresentDistressState retrievePresentDistressState = new RetrievePresentDistressState();
         retrievePresentDistressState.currentScenario(countryCode, 1);
+        String MessageBody="";
+        if(countryCode==0)
+            Toast.makeText(context, "Please Enter the Country Name correctly!", Toast.LENGTH_LONG).show();
+        else {
+            MessageBody = "Urgent! Need Help!\n\r" + etName.getText() + " is stuck in"
+                    + etLocation.getText() + "\n\rPlease provide assistance in any way possible and Please spread the word around.";
+//        VictimActivity.sendMessages(MessageBody);
+            Toast.makeText(context, "All your Contacts have been informed", Toast.LENGTH_LONG).show();
+            MessageBody = "Here are some Emergency Numbers for your area!\n\rAmbulance: "+country.getAmbulanceNumber()
+                    +"\n\rFire: "+country.getFireNumber()+"\n\rPolice: "+country.getPoliceNumber();
+//            DeliverMessages.sendSms(etPhone.getText(), MessageBody);
+            Toast.makeText(context, "Emergency Contacts delivered to Victim", Toast.LENGTH_LONG).show();
+        }
+    }
 
 
+    private static void sendMessages(String MessageBody){
+        ArrayList<String> phoneNumbers = RetrieveContactList.getList(context);
+        for(int i=0;i<phoneNumbers.size();i++){
+            DeliverMessages.sendSms(phoneNumbers.get(i),MessageBody);
+        }
     }
 
     public static void callWebView(String html) {

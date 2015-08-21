@@ -49,4 +49,9 @@ public class VolunteerActivity extends Activity {
         );
         startActivity(intent, transitionActivityOptions.toBundle());
     }
+
+    public void onFabClick(View view) {
+        Intent intent = new Intent(this, JobActivity.class);
+        startActivity(intent);
+    }
 }

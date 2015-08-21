@@ -32,4 +32,8 @@
     <string name="title_activity_circulate_message">CirculateMessageActivity</string>
     <string name="text_view_choose_activity_title">Find Help</string>
     <string name="text_view_helpline">Helpline</string>
+    <string name="text_view_provide_assistance_title">Provide Assistance</string>
+    <string name="text_view_spread">Spread</string>
+    <string name="text_view_family_title">Initiate WildFire</string>
+    <string name="title_activity_job">JobActivity</string>
 </resources>
