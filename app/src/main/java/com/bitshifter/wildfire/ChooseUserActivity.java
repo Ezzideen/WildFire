@@ -17,6 +17,14 @@ public class ChooseUserActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        //Activating GPS
+        GPSLocator gps = new GPSLocator(this);
+        if(!gps.isGPSEnabled){
+            gps.showSettingsAlert();
+        }
+
         setContentView(R.layout.activity_choose_user);
         victimButton = findViewById(R.id.fb_victim);
         familyButton = findViewById(R.id.fb_family);

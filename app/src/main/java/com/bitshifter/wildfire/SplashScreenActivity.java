@@ -1,18 +1,26 @@
 package com.bitshifter.wildfire;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
 
 public class SplashScreenActivity extends Activity {
 
+    private static Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-
+        context = SplashScreenActivity.this;
         initializeEverything();
+    }
+
+    private void initializeEverything() {
+
+        //Generating DB
+        MyDBHandler myDBHandler = new MyDBHandler(context,null,null,1);
 
         Thread timer = new Thread() {
             @Override
@@ -21,23 +29,15 @@ public class SplashScreenActivity extends Activity {
                     sleep(2000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                } finally {
-                    Intent intent = new Intent(getApplicationContext(), ChooseUserActivity.class);
+                }
+                finally {
+                    Intent intent = new Intent(context,ChooseUserActivity.class);
                     startActivity(intent);
                 }
             }
         };
         timer.start();
-    }
 
-    private void initializeEverything() {
-        //Activating GPS
-        GPSLocator gps = new GPSLocator(this);
-        if(!gps.isGPSEnabled){
-            gps.showSettingsAlert();
-        }
-        //Generating DB
-        MyDBHandler myDBHandler = new MyDBHandler(this,null,null,1);
     }
 
     @Override
