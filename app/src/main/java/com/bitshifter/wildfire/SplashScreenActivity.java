@@ -21,7 +21,7 @@ public class SplashScreenActivity extends Activity {
 
         //Generating DB
         MyDBHandler myDBHandler = new MyDBHandler(context,null,null,1);
-
+        FetchCountryData.getCountryByCountryCode(myDBHandler.getWritableDatabase(),"119");
         Thread timer = new Thread() {
             @Override
             public void run() {

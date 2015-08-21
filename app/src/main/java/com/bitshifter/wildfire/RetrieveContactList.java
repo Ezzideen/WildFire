@@ -3,13 +3,14 @@ package com.bitshifter.wildfire;
 import android.content.Context;
 import android.database.Cursor;
 import android.provider.ContactsContract;
-import android.widget.TextView;
+
+import java.util.ArrayList;
 
 
 class RetrieveContactList {
-    public void getList(Context context, TextView textView){
+    public static ArrayList<String> getList(Context context){
         Cursor cursor = null;
-        String res = "";
+        ArrayList<String> strings = new ArrayList<>();
         try {
             cursor = context.getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, null);
             int contactIdIdx = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone._ID);
@@ -18,10 +19,8 @@ class RetrieveContactList {
 //            int photoIdIdx = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.PHOTO_ID);
             cursor.moveToFirst();
             do {
-                String idContact = cursor.getString(contactIdIdx);
-                String name = cursor.getString(nameIdx);
                 String phoneNumber = cursor.getString(phoneNumberIdx);
-                res = res+" "+idContact+" "+name+" "+phoneNumber+"\n";
+                strings.add(phoneNumber);
             } while (cursor.moveToNext());
         } catch (Exception e) {
             e.printStackTrace();
@@ -29,7 +28,7 @@ class RetrieveContactList {
             if (cursor != null) {
                 cursor.close();
             }
-            textView.setText(res);
         }
+        return strings;
     }
 }

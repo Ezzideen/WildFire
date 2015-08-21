@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="@dimen/activity_vertical_margin"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/layout_popout"
+    android:background="@color/divider"
+    >
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/text_view_emergency_title"
+        android:layout_gravity="center" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/text_view_ambulance"
+            android:textStyle="bold"
+            android:textColor="@color/primary_text"
+            android:layout_gravity="left|center" />
+
+        <TextView
+            android:id="@+id/tvAmbulance"
+            android:text="@string/text_view_default"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_gravity="center|right"
+            android:autoLink="phone" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/text_view_fire"
+            android:textStyle="bold"
+            android:textColor="@color/primary_text"
+            android:layout_gravity="left|center" />
+
+        <TextView
+            android:id="@+id/tvFire"
+            android:text="@string/text_view_default"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:autoLink="phone"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_gravity="center|right" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/text_view_police"
+            android:textStyle="bold"
+            android:textColor="@color/primary_text"
+            android:layout_gravity="left|center" />
+
+        <TextView
+            android:id="@+id/tvPolice"
+            android:text="@string/text_view_default"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:autoLink="all"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_gravity="center|right" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/bClosePop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_close"
+        android:layout_gravity="center"
+        android:background="@color/primary" />
+
+</LinearLayout>

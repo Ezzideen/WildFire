@@ -77,4 +77,8 @@ public class FamilyActivity extends Activity {
                     });
         }
     }
+
+    public void onFabClick(View v){
+
+    }
 }

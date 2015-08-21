@@ -25,7 +25,9 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="10dp"
-        android:drawableTop="@drawable/help" />
+        android:drawableEnd="@drawable/phone"
+        android:onClick="onFabClick"
+        />
 
     <ImageView
         android:id="@+id/imageView"
@@ -44,6 +46,28 @@
         android:text="@string/text_view_location"
         android:layout_below="@+id/imageView"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/tvCountry"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_below="@+id/tvLocation"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/bWebView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View Link"
+        android:background="@color/primary"
+        android:textColor="@color/icons"
+        android:layout_marginBottom="10dp"
+        android:layout_above="@+id/fab_button"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible"
+        />
 
 
 </RelativeLayout>

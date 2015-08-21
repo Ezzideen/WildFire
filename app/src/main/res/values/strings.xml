@@ -12,10 +12,17 @@
     <string name="title_activity_family">FamilyActivity</string>
     <string name="title_activity_volunteer">VolunteerActivity</string>
     <string name="text_view_location">Finding you ....</string>
-    <string name="text_view_location_input">Enter Location</string>
+    <string name="text_view_location_input">Enter Victim's Location</string>
     <string name="edit_text_location">E.g. India</string>
-    <string name="text_view_name_input">Enter Name</string>
+    <string name="text_view_name_input">Enter Victim's Name</string>
     <string name="edit_text_name">Name</string>
     <string name="text_view_age_input">Enter Age</string>
     <string name="edit_text_age">20</string>
+    <string name="button_close">Close</string>
+    <string name="text_view_default">-</string>
+    <string name="text_view_emergency_title">Emergency Contacts</string>
+    <string name="text_view_ambulance">Ambulance : </string>
+    <string name="text_view_fire">Fire : </string>
+    <string name="text_view_police">Police : </string>
+    <string name="title_activity_web_view">WebViewActivity</string>
 </resources>

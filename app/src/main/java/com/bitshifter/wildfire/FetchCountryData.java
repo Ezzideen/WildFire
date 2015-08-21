@@ -7,9 +7,8 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import org.apache.http.Header;
@@ -28,6 +27,7 @@ public class FetchCountryData {
     private static JSONObject json;
     private static SQLiteDatabase database;
     private static String country;
+    private static ArrayList<Country> countries;
     //Fetching Json List of countries from ReliefWeb
     public static void insertCountriesIntoDatabase(SQLiteDatabase db){
         Log.v(TAG,"FetchCountryData insertCountriesIntoDatabase");
@@ -36,13 +36,40 @@ public class FetchCountryData {
         params.put("offset","0");
         params.put("limit", "250");
 
-        ReliefWebRestClient.get("countries", params, new JsonHttpResponseHandler() {
+        ReliefWebRestClient.get("countries", params, new AsyncHttpResponseHandler() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                ArrayList<Country> countries = parseJsonCountryList(response);
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                Log.i(TAG, "inside ReliefWebRestClient.get");
+                JSONObject response = null;
+                try {
+                    response = new JSONObject(new String(responseBody));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                countries = parseJsonCountryList(response);
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+
+            }
+
+            @Override
+            public void onFinish() {
+                super.onFinish();
                 insertCountries(database, countries);
             }
         });
+//        ReliefWebRestClient.get("countries", params, new JsonHttpResponseHandler() {
+//            @Override
+//            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+//                Log.i(TAG,"inside ReliefWebRestClient.get");
+//                ArrayList<Country> countries = parseJsonCountryList(response);
+//                insertCountries(database, countries);
+//            }
+//
+//        });
     }
 
     //Parsing Json data and making an arraylist of Country
@@ -94,33 +121,58 @@ public class FetchCountryData {
     //finding Country Name from Coordinates Using geonames api
     public static void getCountryCode(final Context context, final SQLiteDatabase db) {
         Log.v(TAG,"FetchCountryData getCountryCode");
-        Location location = getLocation(context);
+        final Location location = getLocation(context);
         RequestParams params = new RequestParams();
         params.put("lat", location.getLatitude());
         params.put("lng",location.getLongitude());
         params.put("username", "wildfire");
-        GeoNameRESTClient.get("", params, new JsonHttpResponseHandler() {
+        int countryCode;
+        GeoNameRESTClient.get("", params, new AsyncHttpResponseHandler() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                JSONObject response=new JSONObject();
                 try {
+                    response = new JSONObject(new String(responseBody));
                     country = response.getJSONArray("geonames").getJSONObject(0).getString("countryName");
-                    Log.i(TAG, "COUNTRY NAME : " + country);
-                    Cursor cursor = db.query(MyDBHandler.TABLE_COUNTRY, new String[]{MyDBHandler.COUNTRY_COLUMN_CODE},
-                            MyDBHandler.COUNTRY_COLUMN_NAME + " = ? ", new String[]{country}, null, null, null);
-                    cursor.moveToFirst();
-                    Log.i(TAG, "Cursor :" + cursor);
-                    int countryCode = 0;
-                    if (!cursor.isAfterLast())
-                        countryCode = cursor.getInt(0);//cursor.getColumnIndex(MyDBHandler.COUNTRY_COLUMN_CODE)
-                    Log.i(TAG, "COUNTRY CODE :" + countryCode);
-                    Toast.makeText(context, country + " : " + countryCode, Toast.LENGTH_LONG).show();
-
-                } catch (JSONException e) {
-                    Log.e("JSON Exception", e.toString());
                 }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+
+            }
+
+            @Override
+            public void onFinish() {
+                super.onFinish();
+
+                Log.i(TAG,"JSON :"+country);
+                Log.i(TAG, "COUNTRY NAME : " + country);
+                Cursor cursor = db.query(MyDBHandler.TABLE_COUNTRY, new String[]{MyDBHandler.COUNTRY_COLUMN_CODE},
+                        MyDBHandler.COUNTRY_COLUMN_NAME + " = ? ", new String[]{country}, null, null, null);
+                cursor.moveToFirst();
+                Log.i(TAG, "Cursor :" + cursor);
+                int countryCode = 0;
+                if (!cursor.isAfterLast())
+                    countryCode = cursor.getInt(0);//cursor.getColumnIndex(MyDBHandler.COUNTRY_COLUMN_CODE)
+
+                countryCode = 168;
+
+                Log.i(TAG, "COUNTRY CODE :" + countryCode);
+                // Toast.makeText(context, country + " : " + countryCode, Toast.LENGTH_LONG).show();
+
+                Country c = getCountryByCountryCode(db,Integer.toString(countryCode));
+                Log.i(TAG,"Country code :"+c.getId());
+//                Log.i(TAG,"Distress State :"+distressState.isInDistressState());
+                VictimActivity.setLocationText(c,location);
             }
         });
     }
+
+
 
     public static Country getCountryByCountryCode(SQLiteDatabase db,String code){
         Cursor cursor = db.query(MyDBHandler.TABLE_COUNTRY,
