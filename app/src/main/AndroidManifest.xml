@@ -18,6 +18,37 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ChooseUserActivity"
+            android:label="@string/title_activity_choose_user"
+            android:parentActivityName=".SplashScreenActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.bitshifter.wildfire.SplashScreenActivity" />
+        </activity>
+        <activity
+            android:name=".VictimActivity"
+            android:label="@string/title_activity_victim"
+            android:parentActivityName=".ChooseUserActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.bitshifter.wildfire.ChooseUserActivity" />
+        </activity>
+        <activity
+            android:name=".FamilyActivity"
+            android:label="@string/title_activity_family"
+            android:parentActivityName=".ChooseUserActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.bitshifter.wildfire.ChooseUserActivity" />
+        </activity>
+        <activity
+            android:name=".VolunteerActivity"
+            android:label="@string/title_activity_volunteer"
+            android:parentActivityName=".ChooseUserActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.bitshifter.wildfire.ChooseUserActivity" />
+        </activity>
     </application>
-
 </manifest>

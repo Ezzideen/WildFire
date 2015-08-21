@@ -7,6 +7,5 @@
         <shape android:shape="oval">
             <solid android:color="?android:colorPrimary"/>
         </shape>
-        <bitmap android:src="@drawable/victim"/>
     </item>
 </ripple>
