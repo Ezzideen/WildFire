@@ -25,5 +25,9 @@
     <string name="text_view_fire">Fire : </string>
     <string name="text_view_police">Police : </string>
     <string name="title_activity_web_view">WebViewActivity</string>
+    <string name="button_provide_assistance">Provide Assistance</string>
     <string name="button_view_related_articles">View Related Articles</string>
+    <string name="title_activity_provide_assistance">ProvideAssistanceActivity</string>
+    <string name="button_circulate_message">Circulate Message</string>
+    <string name="title_activity_circulate_message">CirculateMessageActivity</string>
 </resources>

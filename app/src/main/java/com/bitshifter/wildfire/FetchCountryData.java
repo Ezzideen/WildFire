@@ -119,7 +119,7 @@ public class FetchCountryData {
     }
 
     //finding Country Name from Coordinates Using geonames api
-    public static void getCountryCode(final Context context, final SQLiteDatabase db) {
+    public static void getCountryCode(final Context context, final SQLiteDatabase db, final int selector) {
         Log.v(TAG,"FetchCountryData getCountryCode");
         final Location location = getLocation(context);
         RequestParams params = new RequestParams();
@@ -157,7 +157,6 @@ public class FetchCountryData {
 //                int countryCode = 0;
 //                if (!cursor.isAfterLast())
 //                    countryCode = cursor.getInt(0);//cursor.getColumnIndex(MyDBHandler.COUNTRY_COLUMN_CODE)
-
                 int countryCode = getCountryCodeFromCountryName(db,country);
                 countryCode = 168;
 
@@ -167,7 +166,14 @@ public class FetchCountryData {
                 Country c = getCountryByCountryCode(db, Integer.toString(countryCode));
                 Log.i(TAG, "Country code :" + c.getId());
 //                Log.i(TAG,"Distress State :"+distressState.isInDistressState());
-                VictimActivity.setLocationText(c, location);
+                switch (selector) {
+                    case 0:
+                        VictimActivity.setLocationText(c, location);
+                        break;
+                    case 2:
+                        ProvideAssistanceActivity.setLocationText(c, location);
+                        break;
+                }
             }
         });
     }

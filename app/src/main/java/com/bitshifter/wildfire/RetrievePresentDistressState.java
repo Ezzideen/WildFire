@@ -53,6 +53,10 @@ public class RetrievePresentDistressState {
                                 progressDialog = ProgressDialog.show(FamilyActivity.context,"Processing...",
                                         "Finding relevant information. Please wait.");
                                 break;
+                            case 2:
+                                progressDialog = ProgressDialog.show(ProvideAssistanceActivity.context,"Processing...",
+                                        "Finding relevant information. Please wait.");
+                                break;
 
                         }
                     }
@@ -98,6 +102,9 @@ public class RetrievePresentDistressState {
                                             break;
                                         case 1:
                                             FamilyActivity.callWebView(html);
+                                            break;
+                                        case 2:
+                                            ProvideAssistanceActivity.callWebView(html);
                                             break;
                                     }
 

@@ -15,50 +15,46 @@ import android.widget.Button;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
-public class VictimActivity extends Activity {
+public class ProvideAssistanceActivity extends Activity {
 
     private static final String PREFERENCE = "preference";
     static TextView tvCountry, tvLocation;
     static TextView tvAmbulance, tvFire, tvPolice;
     static String ambulance, fire, police;
     static RetrievePresentDistressState distressState;
-    static Context context;
     private PopupWindow popupWindow;
     static private Button webViewButton;
-
+    static Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_victim);
+        setContentView(R.layout.activity_provide_assistance);
+        context = this;
         manageTransition();
-        context=this;
-        tvCountry = (TextView) findViewById(R.id.tvCountry);
-        tvLocation = (TextView) findViewById(R.id.tvLocation);
 
-        webViewButton = (Button) findViewById(R.id.bWebView);
+        tvCountry = (TextView) findViewById(R.id.tvCountry1);
+        tvLocation = (TextView) findViewById(R.id.tvLocation1);
+
+        webViewButton = (Button) findViewById(R.id.bWebView1);
 
         MyDBHandler db = new MyDBHandler(this,null,null,1);
-        FetchCountryData.getCountryCode(this,db.getWritableDatabase(), 0);
-//        Toast.makeText(this,FetchCountryData.getCountryByCountryCode(db.getWritableDatabase(),Integer.toString(119)).getId(),Toast.LENGTH_LONG).show();
+        FetchCountryData.getCountryCode(this, db.getWritableDatabase(), 2);
+
     }
 
-
     private void manageTransition() {
-
         Slide slideExitTransition = new Slide(Gravity.BOTTOM);
         slideExitTransition.excludeTarget(android.R.id.statusBarBackground, true);
         slideExitTransition.excludeTarget(android.R.id.navigationBarBackground, true);
     }
 
     public static void setLocationText(Country country, Location location) {
-        ArrayList<String> phoneNumbers = RetrieveContactList.getList(context);
+
         String s = country.getName() + "\n" + location.getLatitude() + " , "+  location.getLongitude();
         tvLocation.setText("Found You!!");
         tvCountry.setText(s);
         RetrievePresentDistressState distressState = new RetrievePresentDistressState();
-        distressState.currentScenario(country.getId(), 0);
+        distressState.currentScenario(country.getId(), 2);
         ambulance = country.getAmbulanceNumber();
         fire = country.getFireNumber();
         police = country.getPoliceNumber();
@@ -74,7 +70,7 @@ public class VictimActivity extends Activity {
 
         View layout = inflater.inflate(R.layout.popout_emergency,
                 (ViewGroup) findViewById(R.id.layout_popout)
-                );
+        );
 
         popupWindow = new PopupWindow(layout, 700, 1000, true);
         popupWindow.showAtLocation(layout, Gravity.CENTER, 0, 0);
@@ -83,7 +79,7 @@ public class VictimActivity extends Activity {
         tvFire = (TextView) layout.findViewById(R.id.tvFire);
         tvPolice = (TextView) layout.findViewById(R.id.tvPolice);
 
-        tvAmbulance.setText("0000"+ambulance);
+        tvAmbulance.setText("0000" + ambulance);
         tvFire.setText("0000" + fire);
         tvPolice.setText("0000"+police);
 
@@ -94,7 +90,6 @@ public class VictimActivity extends Activity {
                 popupWindow.dismiss();
             }
         });
-
     }
 
     public static void callWebView(String html) {
@@ -107,7 +102,7 @@ public class VictimActivity extends Activity {
                 Intent intent = new Intent(context, WebViewActivity.class);
 
                 SharedPreferences.Editor editor = context.getSharedPreferences(PREFERENCE, MODE_PRIVATE).edit();
-                editor.putString("html",passHtml);
+                editor.putString("html", passHtml);
                 editor.commit();
 
                 context.startActivity(intent);
