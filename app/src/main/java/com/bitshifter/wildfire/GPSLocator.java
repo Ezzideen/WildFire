@@ -16,6 +16,7 @@ import android.util.Log;
  */
 public class GPSLocator implements LocationListener {
 
+    private static final String TAG = "WILDFIRE";
     private final Context mContext;
     // flag for GPS status
     boolean isGPSEnabled = false;
@@ -33,6 +34,7 @@ public class GPSLocator implements LocationListener {
     private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
 
     public GPSLocator(Context mContext) {
+        Log.v(TAG,"GPSLocator Constructor");
         this.mContext = mContext;
         findLocation();
     }
@@ -42,6 +44,8 @@ public class GPSLocator implements LocationListener {
     }
 
     public Location findLocation(){
+
+        Log.v(TAG,"GPSLocator findLocation");
         try {
             locationManager = (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);
             // getting GPS status
@@ -109,6 +113,7 @@ public class GPSLocator implements LocationListener {
      * Function to show settings alert dialog
      * */
     public void showSettingsAlert(){
+        Log.v(TAG,"GPSLocator ShowSettingsAlert");
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
         // Setting Dialog Title
         alertDialog.setTitle("GPS is settings");
