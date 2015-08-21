@@ -30,4 +30,6 @@
     <string name="title_activity_provide_assistance">ProvideAssistanceActivity</string>
     <string name="button_circulate_message">Circulate Message</string>
     <string name="title_activity_circulate_message">CirculateMessageActivity</string>
+    <string name="text_view_choose_activity_title">Find Help</string>
+    <string name="text_view_helpline">Helpline</string>
 </resources>

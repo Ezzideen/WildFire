@@ -12,13 +12,13 @@ import io.oauth.OAuth;
 
 
 public class DeliverMessages {
-    public static void sendSms(){
+    public static void sendSms(String to, String body){
         AsyncHttpClient client = new AsyncHttpClient();
         client.addHeader("Authorization", "Basic QUMxNWU5NTMzNGI5Njk3ZDRlMmViZjRlNDJiNzRjMTczMDo3NDliMTA0NzdlZmYxMWMxNDA1ZTIwMTBlOTQ2ZTMxZA==");
         RequestParams requestParams = new RequestParams();
         requestParams.put("From", "+37259120232");
-        requestParams.put("To", "+919903207591");
-        requestParams.put("Body", "U suck man big time!");
+        requestParams.put("To", to);
+        requestParams.put("Body", body);
         client.post("https://api.twilio.com/2010-04-01/Accounts/AC15e95334b9697d4e2ebf4e42b74c1730/Messages",requestParams,new AsyncHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {

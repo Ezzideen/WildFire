@@ -14,13 +14,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class VictimActivity extends Activity {
 
     private static final String PREFERENCE = "preference";
-    static TextView tvCountry, tvLocation;
+    static TextView tvCountry, tvLocation, tvCordinates;
     static TextView tvAmbulance, tvFire, tvPolice;
     static String ambulance, fire, police;
     static RetrievePresentDistressState distressState;
@@ -36,6 +37,7 @@ public class VictimActivity extends Activity {
         context=this;
         tvCountry = (TextView) findViewById(R.id.tvCountry);
         tvLocation = (TextView) findViewById(R.id.tvLocation);
+        tvCordinates = (TextView) findViewById(R.id.tvCordinates);
 
         webViewButton = (Button) findViewById(R.id.bWebView);
 
@@ -53,18 +55,27 @@ public class VictimActivity extends Activity {
     }
 
     public static void setLocationText(Country country, Location location) {
-        ArrayList<String> phoneNumbers = RetrieveContactList.getList(context);
-        String s = country.getName() + "\n" + location.getLatitude() + " , "+  location.getLongitude();
         tvLocation.setText("Found You!!");
-        tvCountry.setText(s);
+        tvCountry.setText(country.getName());
+        tvCordinates.setText("( " + location.getLatitude() + ", " + location.getLongitude() + " )");
         RetrievePresentDistressState distressState = new RetrievePresentDistressState();
         distressState.currentScenario(country.getId(), 0);
         ambulance = country.getAmbulanceNumber();
         fire = country.getFireNumber();
         police = country.getPoliceNumber();
-
+        String MessageBody="Urgent! Need Help!\n\rI am stuck at"
+                +country.getName()+" ( "+location.getLatitude()+", "+location.getLongitude()+" )";
+//        VictimActivity.sendMessages(MessageBody);
+        Toast.makeText(context, "All your Contacts have been informed", Toast.LENGTH_LONG).show();
     }
 
+    private static void sendMessages(String MessageBody){
+        ArrayList<String> phoneNumbers = RetrieveContactList.getList(context);
+        for(int i=0;i<phoneNumbers.size();i++){
+            DeliverMessages.sendSms(phoneNumbers.get(i),MessageBody);
+        }
+
+    }
     public void onFabClick(View view) {
 
         Button bClose;
