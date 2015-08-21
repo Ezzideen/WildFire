@@ -14,6 +14,7 @@ public class VictimActivity extends Activity {
         manageTransition();
     }
 
+
     private void manageTransition() {
 
         Slide slideExitTransition = new Slide(Gravity.BOTTOM);

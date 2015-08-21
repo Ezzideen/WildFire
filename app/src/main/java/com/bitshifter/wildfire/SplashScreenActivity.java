@@ -12,6 +12,8 @@ public class SplashScreenActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
+        initializeEverything();
+
         Thread timer = new Thread() {
             @Override
             public void run() {
@@ -26,6 +28,16 @@ public class SplashScreenActivity extends Activity {
             }
         };
         timer.start();
+    }
+
+    private void initializeEverything() {
+        //Activating GPS
+        GPSLocator gps = new GPSLocator(this);
+        if(!gps.isGPSEnabled){
+            gps.showSettingsAlert();
+        }
+        //Generating DB
+        MyDBHandler myDBHandler = new MyDBHandler(this,null,null,1);
     }
 
     @Override
