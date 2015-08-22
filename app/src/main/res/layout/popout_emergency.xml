@@ -1,109 +1,231 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:padding="@dimen/activity_vertical_margin"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/layout_popout"
-    android:background="@color/divider"
+    android:background="@drawable/border"
     >
 
 
     <TextView
+        android:id="@+id/tvPopoutTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/text_view_emergency_title"
-        android:layout_gravity="center" />
+        android:typeface="sans"
+        android:textStyle="bold"
+        android:textSize="32sp"
+        android:textColor="@color/primary_dark"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        />
 
+    <TextView
+        android:id="@+id/tvAmbulanceHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/text_view_ambulance"
+        android:layout_below="@+id/tvPopoutTitle"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:textColor="@color/primary_dark"
+        android:layout_alignParentStart="true"
+        android:textSize="18sp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/text_view_ambulance"
-            android:textStyle="bold"
-            android:textColor="@color/primary_text"
-            android:layout_gravity="left|center" />
+    <ImageView
+        android:id="@+id/ivAmbulance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/text_view_default"
+        android:background="@drawable/ambulance"
+        android:layout_below="@+id/tvAmbulanceHeader"
+        android:layout_alignStart="@+id/tvPopoutTitle" />
 
-        <TextView
-            android:id="@+id/tvAmbulance"
-            android:text="@string/text_view_default"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_gravity="center|right"
-            android:autoLink="phone" />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/tvFireHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_view_fire"
+        android:layout_below="@+id/ivAmbulance"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:textColor="@color/primary_dark"
+        android:layout_alignParentStart="true"
+        android:textSize="18sp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/text_view_fire"
-            android:textStyle="bold"
-            android:textColor="@color/primary_text"
-            android:layout_gravity="left|center" />
+    <ImageView
+        android:id="@+id/ivFire"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/fire"
+        android:text="@string/text_view_default"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/tvFireHeader"
+        android:layout_alignStart="@+id/tvPopoutTitle" />
 
-        <TextView
-            android:id="@+id/tvFire"
-            android:text="@string/text_view_default"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:autoLink="phone"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_gravity="center|right" />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/tvPoliceHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/text_view_police"
+        android:layout_below="@+id/ivFire"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:textColor="@color/primary_dark"
+        android:layout_alignParentStart="true"
+        android:textSize="18sp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/text_view_police"
-            android:textStyle="bold"
-            android:textColor="@color/primary_text"
-            android:layout_gravity="left|center" />
-
-        <TextView
-            android:id="@+id/tvPolice"
-            android:text="@string/text_view_default"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:autoLink="all"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_gravity="center|right" />
-    </LinearLayout>
+    <ImageView
+        android:id="@+id/ivPolice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/police"
+        android:layout_below="@+id/tvPoliceHeader"
+        android:layout_alignStart="@+id/tvPopoutTitle" />
 
     <Button
         android:id="@+id/bClosePop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_close"
-        android:layout_gravity="center"
-        android:background="@color/primary" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@color/primary"
+        android:textColor="@color/icons"
+        android:textSize="18sp"
+        android:layout_marginBottom="30dp"
+        />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/tvAmbulance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/text_view_default"
+        android:textSize="18sp"
+        android:autoLink="phone"
+        android:layout_below="@+id/tvAmbulanceHeader"
+        android:layout_alignEnd="@+id/tvPopoutTitle" />
+
+    <TextView
+        android:id="@+id/tvFire"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/text_view_default"
+        android:textSize="18sp"
+        android:autoLink="phone"
+        android:layout_below="@+id/tvFireHeader"
+        android:layout_alignEnd="@+id/tvPopoutTitle" />
+
+    <TextView
+        android:id="@+id/tvPolice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/text_view_default"
+        android:textSize="18sp"
+        android:autoLink="phone"
+        android:layout_below="@+id/tvPoliceHeader"
+        android:layout_alignEnd="@+id/tvPopoutTitle" />
+
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:gravity="center_vertical">-->
+        <!--<TextView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+            <!--android:text="@string/text_view_ambulance"-->
+            <!--android:textStyle="bold"-->
+            <!--android:textColor="@color/primary_dark"-->
+            <!--android:layout_gravity="left|center" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/tvAmbulance"-->
+            <!--android:text="@string/text_view_default"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+            <!--android:layout_gravity="center|right"-->
+            <!--android:autoLink="phone" />-->
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:gravity="center_vertical">-->
+        <!--<TextView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+            <!--android:text="@string/text_view_fire"-->
+            <!--android:textStyle="bold"-->
+            <!--android:textColor="@color/primary_text"-->
+            <!--android:layout_gravity="left|center" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/tvFire"-->
+            <!--android:text="@string/text_view_default"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:autoLink="phone"-->
+            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+            <!--android:layout_gravity="center|right" />-->
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:gravity="center_vertical">-->
+        <!--<TextView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+            <!--android:text="@string/text_view_police"-->
+            <!--android:textStyle="bold"-->
+            <!--android:textColor="@color/primary_text"-->
+            <!--android:layout_gravity="left|center" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/tvPolice"-->
+            <!--android:text="@string/text_view_default"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:autoLink="all"-->
+            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+            <!--android:layout_gravity="center|right" />-->
+    <!--</LinearLayout>-->
+
+    <!--<Button-->
+        <!--android:id="@+id/bClosePop"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/button_close"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:background="@color/primary"-->
+        <!--android:textColor="@color/icons" />-->
+
+</RelativeLayout>

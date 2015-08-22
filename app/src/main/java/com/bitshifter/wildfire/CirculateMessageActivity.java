@@ -10,6 +10,9 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class CirculateMessageActivity extends Activity {
 
@@ -42,9 +45,8 @@ public class CirculateMessageActivity extends Activity {
         if (cursor.moveToFirst()) { // must check the result to prevent exception
 
             do {
-                for(int idx=0;idx<cursor.getColumnCount();idx++)
-                {
-                    if(cursor.getColumnName(idx).equals("body") && cursor.getString(idx).contains("Twilio") ){
+                for (int idx = 0; idx < cursor.getColumnCount(); idx++) {
+                    if (cursor.getColumnName(idx).equals("body") && cursor.getString(idx).contains("Twilio")) {
                         return cursor.getString(idx);
                     }
                 }
@@ -57,7 +59,21 @@ public class CirculateMessageActivity extends Activity {
     }
 
     public void circulateMessage(View view) {
+        String text = etMessage.getText().toString().trim();
+        if (!text.equals("No message found!!") && !text.equals("")) {
+//        CirculateMessageActivity.sendMessages(text);
+            Toast.makeText(context, "Message has been forwarded to all your Contacts", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(context, "Please check the input message", Toast.LENGTH_LONG).show();
+        }
 
     }
 
+    private static void sendMessages(String MessageBody) {
+        ArrayList<String> phoneNumbers = RetrieveContactList.getList(context);
+        for (int i = 0; i < phoneNumbers.size(); i++) {
+            DeliverMessages.sendSms(phoneNumbers.get(i), MessageBody);
+        }
+
+    }
 }

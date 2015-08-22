@@ -19,7 +19,7 @@
     <string name="text_view_age_input">Enter Age</string>
     <string name="edit_text_age">20</string>
     <string name="button_close">Close</string>
-    <string name="text_view_default">-</string>
+    <string name="text_view_default">--</string>
     <string name="text_view_emergency_title">Emergency Contacts</string>
     <string name="text_view_ambulance">Ambulance : </string>
     <string name="text_view_fire">Fire : </string>
@@ -36,4 +36,9 @@
     <string name="text_view_spread">Spread</string>
     <string name="text_view_family_title">Initiate WildFire</string>
     <string name="title_activity_job">JobActivity</string>
+    <string name="text_view_jobs">Jobs</string>
+    <string name="text_view_volunteer_titte">Volunteer</string>
+    <string name="text_view_label">Enter Desired Location</string>
+    <string name="text_view_jobs_title">Find Jobs</string>
+    <string name="text_view_search">Search</string>
 </resources>

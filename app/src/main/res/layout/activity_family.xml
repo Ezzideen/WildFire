@@ -13,7 +13,7 @@
         android:background="?android:colorPrimary"
         android:transitionName="holder1"
         android:minHeight="50dp"
-        />
+        android:elevation="10dp" />
 
     <Button
         android:id="@+id/bWebView"
@@ -25,6 +25,7 @@
         android:visibility="invisible"
         android:layout_above="@+id/fab_button"
         android:layout_marginBottom="20dp"
+        android:elevation="@dimen/button_elevation"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
         android:layout_centerHorizontal="true" />
@@ -135,7 +136,8 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:textColor="@color/icons"
-        android:textSize="28sp" />
+        android:textSize="28sp"
+        android:elevation="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -147,5 +149,15 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ivTitle"
+        android:background="@drawable/top_icon"
+        android:layout_marginEnd="26dp"
+        android:cropToPadding="false"
+        android:elevation="10dp"
+        android:layout_alignTop="@+id/tvFamilyTitle"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

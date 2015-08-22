@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.bitshifter.wildfire.VolunteerActivity">
+    tools:context="com.bitshifter.wildfire.VolunteerActivity"
+    >
 
     <Toolbar
         android:id="@+id/activity_transition_header"
@@ -11,19 +12,20 @@
         android:background="?android:colorPrimary"
         android:transitionName="holder1"
         android:minHeight="50dp"
-        />
+        android:elevation="10dp" />
 
     <Button
         android:id="@+id/fab_button"
         android:transitionName="fab"
-        android:layout_width="@dimen/float_button_size"
-        android:layout_height="@dimen/float_button_size"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:background="@drawable/ripple_round"
         android:stateListAnimator="@anim/fab_anim"
         android:elevation="@dimen/button_elevation"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="30dp"
+        android:drawableTop="@drawable/jobs"
         android:onClick="onFabClick"
         />
 
@@ -32,10 +34,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_provide_assistance"
-        android:layout_below="@+id/activity_transition_header"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="110dp"
+        android:layout_marginTop="100dp"
         android:onClick="provideAssistance"
+        android:layout_below="@+id/activity_transition_header"
+        android:layout_marginStart="40dp"
+        android:background="@color/primary"
+        android:textColor="@color/icons"
+        android:elevation="@dimen/button_elevation"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
         />
 
     <Button
@@ -43,10 +50,53 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_circulate_message"
-        android:layout_above="@+id/fab_button"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="97dp"
         android:onClick="circulateMessage"
-        />
+        android:layout_marginTop="100dp"
+        android:background="@color/primary"
+        android:textColor="@color/icons"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:layout_below="@+id/bhelp"
+        android:elevation="@dimen/button_elevation"
+        android:layout_toEndOf="@+id/bhelp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/text_view_volunteer_titte"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:id="@+id/tvVolunteerTitle"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:textColor="@color/icons"
+        android:textSize="28sp"
+        android:elevation="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/text_view_jobs"
+        android:id="@+id/textView2"
+        android:textColor="@color/primary_text"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ivTitle"
+        android:background="@drawable/top_icon"
+        android:layout_marginEnd="24dp"
+        android:cropToPadding="false"
+        android:elevation="10dp"
+        android:layout_alignTop="@+id/tvVolunteerTitle"
+        android:layout_alignParentEnd="true" />
+
+
+
+
 
 </RelativeLayout>

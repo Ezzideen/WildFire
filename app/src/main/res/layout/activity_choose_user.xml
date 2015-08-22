@@ -1,8 +1,7 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.bitshifter.wildfire.ChooseUserActivity">
 
@@ -12,15 +11,18 @@
         android:layout_height="144dp"
         android:transitionName="holder1"
         android:background="?android:colorPrimary"
-        />
+        android:elevation="30dp" />
 
     <LinearLayout
+        android:id="@+id/ll1"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:onClick="onVictimClick" >
+        android:onClick="onVictimClick"
+        android:layout_below="@+id/activity_transition_header"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="52dp">
 
         <Button
             android:id="@+id/fb_victim"
@@ -32,7 +34,9 @@
             android:stateListAnimator="@anim/fab_anim"
             android:drawableTop="@drawable/victim"
             android:padding="10dp"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:onClick="onVictimClick"
+            />
 
         <TextView
             android:layout_width="wrap_content"
@@ -44,12 +48,15 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/ll2"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:onClick="onFamilyClick" >
+        android:onClick="onFamilyClick"
+        android:layout_below="@+id/ll1"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="52dp">
 
         <Button
             android:id="@+id/fb_family"
@@ -60,7 +67,9 @@
             android:background="@drawable/ripple_round"
             android:stateListAnimator="@anim/fab_anim"
             android:drawableTop="@drawable/family"
-            android:padding="10dp" />
+            android:padding="10dp"
+            android:onClick="onFamilyClick"
+            />
 
         <TextView
             android:layout_width="wrap_content"
@@ -73,12 +82,15 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/ll3"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:onClick="onVolunteerClick" >
+        android:onClick="onVolunteerClick"
+        android:layout_marginBottom="43dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
 
         <Button
             android:id="@+id/fb_volunteer"
@@ -90,7 +102,9 @@
             android:stateListAnimator="@anim/fab_anim"
             android:drawableTop="@drawable/volunteer"
             android:padding="10dp"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:onClick="onVolunteerClick"
+            />
 
         <TextView
             android:layout_width="wrap_content"
@@ -102,4 +116,17 @@
 
     </LinearLayout>
 
-</LinearLayout>
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Who are you?"
+        android:textColor="@color/icons"
+        android:textSize="42sp"
+        android:elevation="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="47dp" />
+
+</RelativeLayout>

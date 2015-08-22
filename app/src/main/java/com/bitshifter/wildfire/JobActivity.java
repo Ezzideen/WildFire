@@ -6,9 +6,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -71,6 +71,10 @@ public class JobActivity extends Activity {
         MyDBHandler db = new MyDBHandler(this, null, null, 1);
         int countryCode = FetchCountryData.getCountryCodeFromCountryName(db.getWritableDatabase(),
                 etJobCountry.getText().toString().trim());
+        if(countryCode == 0) {
+            Toast.makeText(context, "Please enter the correct country",Toast.LENGTH_LONG).show();
+            return;
+        }
         String BASE_URL = "http://reliefweb.int/jobs?country=" + countryCode;
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(BASE_URL, new AsyncHttpResponseHandler() {
@@ -126,9 +130,9 @@ public class JobActivity extends Activity {
         String html = "<h2 style=\"text-align: center;\"><u>Jobs Near You</u></h2>\n";
         for (Job job : jobs) {
             html += "<h3>" + job.getTitle() + "</h3>\n";
-            html += "<a href=\"" + job.getLink() + "\"> Click HERE </a>";
+            html += "<a href=\"" + job.getLink() + "\"> Click HERE </a>\n<hr>";
         }
-        Log.i("HTML", html);
+        //Log.i("HTML", html);
         SharedPreferences.Editor editor = getSharedPreferences(PREFERENCE, MODE_PRIVATE).edit();
         editor.putString("html", html);
         editor.commit();

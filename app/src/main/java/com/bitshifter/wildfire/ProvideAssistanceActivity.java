@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class ProvideAssistanceActivity extends Activity {
@@ -25,6 +26,7 @@ public class ProvideAssistanceActivity extends Activity {
     private PopupWindow popupWindow;
     static private Button webViewButton;
     static Context context;
+    RelativeLayout relativeLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +38,7 @@ public class ProvideAssistanceActivity extends Activity {
         tvLocation = (TextView) findViewById(R.id.tvLocation1);
         tvCordinates = (TextView) findViewById(R.id.tvCordinates1);
 
+        relativeLayout = (RelativeLayout) findViewById(R.id.assistanceMasterLayout);
         webViewButton = (Button) findViewById(R.id.bWebView1);
 
         MyDBHandler db = new MyDBHandler(this,null,null,1);
@@ -74,6 +77,7 @@ public class ProvideAssistanceActivity extends Activity {
 
         popupWindow = new PopupWindow(layout, 700, 1000, true);
         popupWindow.showAtLocation(layout, Gravity.CENTER, 0, 0);
+        relativeLayout.setVisibility(View.GONE);
 
         tvAmbulance = (TextView) layout.findViewById(R.id.tvAmbulance);
         tvFire = (TextView) layout.findViewById(R.id.tvFire);
@@ -88,6 +92,7 @@ public class ProvideAssistanceActivity extends Activity {
             @Override
             public void onClick(View v) {
                 popupWindow.dismiss();
+                relativeLayout.setVisibility(View.VISIBLE);
             }
         });
     }
