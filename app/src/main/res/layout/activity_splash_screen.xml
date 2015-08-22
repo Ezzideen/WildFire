@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="WildFire"
-            android:textSize="78sp"
+            android:textSize="60sp"
             android:textColor="@color/icons"
             android:layout_gravity="center_vertical"
             android:textStyle="bold|italic"

@@ -82,6 +82,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.bitshifter.wildfire.VolunteerActivity" />
         </activity>
+        <activity
+            android:name=".AboutUsActivity"
+            android:label="@string/title_activity_about_us"
+            android:parentActivityName=".ChooseUserActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.bitshifter.wildfire.ChooseUserActivity" />
+        </activity>
     </application>
 
 </manifest>

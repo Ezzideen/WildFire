@@ -23,20 +23,22 @@ public class SplashScreenActivity extends Activity {
         imageView = (ImageView) findViewById(R.id.ivSplashIcon);
         textView = (TextView) findViewById(R.id.tvSplashText);
 
-        shake();
+        //shake();
+        //
+        // interpolator();
         initializeEverything();
     }
 
     private void shake() {
         Animation shake = AnimationUtils.loadAnimation(context, R.anim.shake);
         imageView.startAnimation(shake);
-        textView.startAnimation(shake);
+        //textView.startAnimation(shake);
     }
 
     private void initializeEverything() {
         //Generating DB
         MyDBHandler myDBHandler = new MyDBHandler(context,null,null,1);
-        FetchCountryData.getCountryByCountryCode(myDBHandler.getWritableDatabase(),"119");
+        FetchCountryData.getCountryByCountryCode(myDBHandler.getWritableDatabase(), "119");
         Thread timer = new Thread() {
             @Override
             public void run() {
@@ -53,6 +55,11 @@ public class SplashScreenActivity extends Activity {
         };
         timer.start();
 
+    }
+
+    public void interpolator() {
+        Animation tvAnim = AnimationUtils.loadAnimation(this, R.anim.interpolar_animation);
+        textView.startAnimation(tvAnim);
     }
 
     @Override

@@ -41,4 +41,6 @@
     <string name="text_view_label">Enter Desired Location</string>
     <string name="text_view_jobs_title">Find Jobs</string>
     <string name="text_view_search">Search</string>
+    <string name="title_activity_about_us">AboutUsActivity</string>
+    <string name="text_view_about_us">About Us</string>
 </resources>
