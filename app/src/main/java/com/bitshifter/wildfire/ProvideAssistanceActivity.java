@@ -52,7 +52,7 @@ public class ProvideAssistanceActivity extends Activity {
         slideExitTransition.excludeTarget(android.R.id.navigationBarBackground, true);
     }
 
-    public static void setLocationText(Country country, Location location) {
+    public static void setLocationText(Country country, Location location, String countryShortId) {
         tvLocation.setText("Found You!!");
         tvCountry.setText(country.getName());
         tvCordinates.setText("( " + location.getLatitude() + ", " + location.getLongitude() + " )");

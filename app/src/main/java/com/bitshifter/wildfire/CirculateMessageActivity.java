@@ -61,7 +61,7 @@ public class CirculateMessageActivity extends Activity {
     public void circulateMessage(View view) {
         String text = etMessage.getText().toString().trim();
         if (!text.equals("No message found!!") && !text.equals("")) {
-//        CirculateMessageActivity.sendMessages(text);
+        CirculateMessageActivity.sendMessages(text);
             Toast.makeText(context, "Message has been forwarded to all your Contacts", Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(context, "Please check the input message", Toast.LENGTH_LONG).show();

@@ -27,6 +27,7 @@ public class FetchCountryData {
     private static JSONObject json;
     private static SQLiteDatabase database;
     private static String country;
+    private static String countryShortId;
     private static ArrayList<Country> countries;
     //Fetching Json List of countries from ReliefWeb
     public static void insertCountriesIntoDatabase(SQLiteDatabase db){
@@ -134,6 +135,7 @@ public class FetchCountryData {
                 try {
                     response = new JSONObject(new String(responseBody));
                     country = response.getJSONArray("geonames").getJSONObject(0).getString("countryName");
+                    countryShortId = response.getJSONArray("geonames").getJSONObject(0).getString("countryCode");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -168,10 +170,10 @@ public class FetchCountryData {
 //                Log.i(TAG,"Distress State :"+distressState.isInDistressState());
                 switch (selector) {
                     case 0:
-                        VictimActivity.setLocationText(c, location);
+                        VictimActivity.setLocationText(c, location, countryShortId);
                         break;
                     case 2:
-                        ProvideAssistanceActivity.setLocationText(c, location);
+                        ProvideAssistanceActivity.setLocationText(c, location, countryShortId);
                         break;
                 }
             }

@@ -132,13 +132,13 @@ public class FamilyActivity extends Activity {
                     .setMessage("Are you sure you want to send distress message to all your contacts?")
                     .setPositiveButton("Send Distress Message", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            //        VictimActivity.sendMessages(MessageBody);
+                                    FamilyActivity.sendMessages(MessageBody);
                             Toast.makeText(context, "All your Contacts have been informed", Toast.LENGTH_LONG).show();
                             MessageBody = "Here are some Emergency Numbers for your area!\n\rAmbulance: " + country.getAmbulanceNumber()
                                     + "\n\rFire: " + country.getFireNumber() + "\n\rPolice: " + country.getPoliceNumber();
 
                             if (!etPhone.getText().toString().trim().equals("")) {
-                                //            DeliverMessages.sendSms(etPhone.getText(), MessageBody);
+                                            DeliverMessages.sendSms(etPhone.getText().toString(), MessageBody);
                                 Toast.makeText(context, "Emergency Contacts delivered to Victim", Toast.LENGTH_LONG).show();
                             }
                         }

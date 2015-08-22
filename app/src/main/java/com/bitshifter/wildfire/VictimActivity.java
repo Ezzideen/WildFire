@@ -2,6 +2,7 @@ package com.bitshifter.wildfire;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -60,16 +61,19 @@ public class VictimActivity extends Activity {
         slideExitTransition.excludeTarget(android.R.id.navigationBarBackground, true);
     }
 
-    public static void setLocationText(Country country, Location location) {
+    private static ProgressDialog progressDialog;
+
+    static String MessageBody;
+    public static void setLocationText(Country country, Location location, String countryShortId) {
         tvLocation.setText("Found You!!");
         tvCountry.setText(country.getName());
         tvCordinates.setText("( " + location.getLatitude() + ", " + location.getLongitude() + " )");
         RetrievePresentDistressState distressState = new RetrievePresentDistressState();
         distressState.currentScenario(country.getId(), 0);
-        ambulance = country.getAmbulanceNumber();
+        ambulance =  country.getAmbulanceNumber();
         fire = country.getFireNumber();
         police = country.getPoliceNumber();
-        String MessageBody = "Urgent! Need Help!\n\rI am stuck at"
+        MessageBody = "Urgent! Need Help!\n\rI am stuck at"
                 + country.getName() + " ( " + location.getLatitude() + ", " + location.getLongitude() + " )";
 
         //Adding Dialogue Box
@@ -78,7 +82,7 @@ public class VictimActivity extends Activity {
                 .setMessage("Are you sure you want to send distress message to all your contacts?")
                 .setPositiveButton("Send Distress Message", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-//                      VictimActivity.sendMessages(MessageBody);
+                     VictimActivity.sendMessages(MessageBody);
                         Toast.makeText(context, "All your Contacts have been informed", Toast.LENGTH_LONG).show();
                     }
                 })
@@ -91,7 +95,7 @@ public class VictimActivity extends Activity {
                 .show();
     }
 
-    private static void sendMessages(String MessageBody) {
+    public static void sendMessages(String MessageBody) {
         ArrayList<String> phoneNumbers = RetrieveContactList.getList(context);
         for (int i = 0; i < phoneNumbers.size(); i++) {
             DeliverMessages.sendSms(phoneNumbers.get(i), MessageBody);
