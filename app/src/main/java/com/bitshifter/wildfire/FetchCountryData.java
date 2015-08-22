@@ -160,7 +160,7 @@ public class FetchCountryData {
 //                if (!cursor.isAfterLast())
 //                    countryCode = cursor.getInt(0);//cursor.getColumnIndex(MyDBHandler.COUNTRY_COLUMN_CODE)
                 int countryCode = getCountryCodeFromCountryName(db,country);
-                countryCode = 168;
+                //countryCode = 168; //HardCoded Removing
 
                 Log.i(TAG, "COUNTRY CODE :" + countryCode);
                 // Toast.makeText(context, country + " : " + countryCode, Toast.LENGTH_LONG).show();
