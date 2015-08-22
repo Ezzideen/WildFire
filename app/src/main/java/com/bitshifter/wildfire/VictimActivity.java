@@ -1,7 +1,9 @@
 package com.bitshifter.wildfire;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Location;
@@ -69,8 +71,24 @@ public class VictimActivity extends Activity {
         police = country.getPoliceNumber();
         String MessageBody = "Urgent! Need Help!\n\rI am stuck at"
                 + country.getName() + " ( " + location.getLatitude() + ", " + location.getLongitude() + " )";
-//        VictimActivity.sendMessages(MessageBody);
-        Toast.makeText(context, "All your Contacts have been informed", Toast.LENGTH_LONG).show();
+
+        //Adding Dialogue Box
+        AlertDialog alertDialog = new AlertDialog.Builder(context)
+                .setTitle("Sending Distress")
+                .setMessage("Are you sure you want to send distress message to all your contacts?")
+                .setPositiveButton("Send Distress Message", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+//                      VictimActivity.sendMessages(MessageBody);
+                        Toast.makeText(context, "All your Contacts have been informed", Toast.LENGTH_LONG).show();
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(context, "Cancelled", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setIcon(R.drawable.alert)
+                .show();
     }
 
     private static void sendMessages(String MessageBody) {
